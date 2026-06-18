@@ -24,7 +24,9 @@ jobs:
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
+      # `npm install` (not `npm ci`) so platform-specific optional deps
+      # (rollup/onnx native binaries, @emnapi) resolve on the Linux runner.
+      - run: npm install --no-audit --no-fund
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
