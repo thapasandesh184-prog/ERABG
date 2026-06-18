@@ -1,0 +1,29 @@
+appId: com.erabg.app
+productName: ERABG
+copyright: Copyright © 2026 Sandesh Thapa
+
+directories:
+  output: release
+  buildResources: build
+
+# The renderer is fully bundled into dist/ by Vite, and the main process uses
+# only Node/Electron built-ins — so no node_modules need to be packaged.
+files:
+  - dist/**/*
+  - electron/**/*
+  - package.json
+
+mac:
+  target:
+    - target: dmg
+      arch: arm64
+    - target: zip
+      arch: arm64
+  category: public.app-category.photography
+  icon: build/icon.icns
+  # No Apple Developer certificate — produce an unsigned build for local use.
+  identity: null
+
+dmg:
+  title: ${productName}
+  artifactName: ${productName}-${version}-arm64.${ext}
